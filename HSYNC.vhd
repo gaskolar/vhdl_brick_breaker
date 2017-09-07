@@ -87,7 +87,7 @@ begin
 	pr : prescaler
 		generic map (
 			width => 3,
-			value => 5
+			value => 4
 		)
 		port map (
 			clk => clk,

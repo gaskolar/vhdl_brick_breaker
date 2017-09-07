@@ -58,11 +58,16 @@ architecture Behavioral of VSYNC is
 	end component;
 	
 	signal r 	: STD_LOGIC_VECTOR (9 downto 0);
+	-- Not fully working
 	constant dt : STD_LOGIC_VECTOR (9 downto 0) := "0111100000";--480
-	constant xy : STD_LOGIC_VECTOR (9 downto 0) := "0000011101";--29
 	constant fp : STD_LOGIC_VECTOR (9 downto 0) := "0000100001";--33
 	constant bp : STD_LOGIC_VECTOR (9 downto 0) := "0000001010";--10
 	constant sp : STD_LOGIC_VECTOR (9 downto 0) := "0000000010";--2
+	-- Working
+	--constant dt : STD_LOGIC_VECTOR (9 downto 0) := "0111100000";--480
+	--constant bp : STD_LOGIC_VECTOR (9 downto 0) := "0000011101";--29
+	--constant fp : STD_LOGIC_VECTOR (9 downto 0) := "0000001010";--10
+	--constant sp : STD_LOGIC_VECTOR (9 downto 0) := "0000000010";--2
 	
 begin
 
@@ -71,7 +76,7 @@ begin
 	cnt : counter_with_limit
 		generic map(
 			width => 10,
-			limit => 525
+			limit => 512
 		)
 		port map(
 			clk => clk,
@@ -88,7 +93,7 @@ begin
 			vvidon <= '1';
 		end if;
 		
-		if (r >= dt+ bp) and (r < dt + bp + sp) then
+		if (r >= dt + bp) and (r < dt + bp + sp) then
 			vsyncsig <= '0';
 		else
 			vsyncsig <= '1';
